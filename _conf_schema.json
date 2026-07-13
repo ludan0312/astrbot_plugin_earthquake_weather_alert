@@ -1,0 +1,63 @@
+{
+  "address": {
+    "description": "监测地址",
+    "type": "string",
+    "default": "",
+    "hint": "用于天气查询和预警定位，例如：XX市XX区"
+  },
+  "target_qq": {
+    "description": "推送目标 QQ 号",
+    "type": "string",
+    "default": "",
+    "hint": "预警消息将私聊推送给该 QQ，例如：1234567890"
+  },
+  "platform_id": {
+    "description": "消息平台实例 ID（可选）",
+    "type": "string",
+    "default": "",
+    "hint": "如果推送失败，在群聊发送 /sid 查看会话格式，填写平台实例 ID（如 千羽）"
+  },
+  "qweather_key": {
+    "description": "和风天气 Web API Key",
+    "type": "string",
+    "default": "",
+    "hint": "前往 https://dev.qweather.com 注册获取个人开发者 Key"
+  },
+  "qweather_host": {
+    "description": "和风天气 API Host",
+    "type": "string",
+    "default": "",
+    "hint": "前往和风天气控制台 → 设置 → 复制你的 API Host，例如：xxx.re.qweatherapi.com"
+  },
+  "min_magnitude": {
+    "description": "最小震级阈值",
+    "type": "float",
+    "default": 3.0,
+    "hint": "低于此震级的地震不推送"
+  },
+  "min_warning_level": {
+    "description": "最小气象预警级别",
+    "type": "string",
+    "default": "蓝色",
+    "options": ["蓝色", "黄色", "橙色", "红色"],
+    "hint": "低于此级别的气象预警不推送"
+  },
+  "earthquake_poll_interval": {
+    "description": "地震轮询间隔（秒）",
+    "type": "int",
+    "default": 30,
+    "hint": "建议不低于 30 秒"
+  },
+  "warning_poll_interval": {
+    "description": "气象预警轮询间隔（秒）",
+    "type": "int",
+    "default": 300,
+    "hint": "建议不低于 300 秒（5 分钟）"
+  },
+  "daily_weather_push_time": {
+    "description": "每日天气推送时间（HH:MM，留空关闭）",
+    "type": "string",
+    "default": "08:00",
+    "hint": "例如 08:00 表示每天早上8点自动推送天气，留空则不推送"
+  }
+}
