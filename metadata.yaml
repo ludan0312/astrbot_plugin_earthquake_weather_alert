@@ -1,13 +1,4 @@
 name: earthquake_weather_alert
-display_name: 地震天气预警
-desc: 实时地震预警、气象灾害预警与每日天气推送插件，支持震中距/烈度/波到达时间计算，私聊推送
-short_desc: 地震预警 + 气象灾害预警 + 实时天气推送
-version: 1.0.0
+desc: 地震预警 + 气象灾害预警 + 实时天气，私聊推送
+version: 1.1.0
 author: ludan
-license: MIT
-tags:
-  - 预警
-  - 天气
-  - 地震
-  - 灾害
-  - 推送

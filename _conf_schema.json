@@ -3,7 +3,7 @@
     "description": "监测地址",
     "type": "string",
     "default": "",
-    "hint": "用于天气查询和预警定位，例如：XX市XX区"
+    "hint": "用于天气查询和预警定位，例如：成都市双流区"
   },
   "target_qq": {
     "description": "推送目标 QQ 号",
@@ -11,23 +11,29 @@
     "default": "",
     "hint": "预警消息将私聊推送给该 QQ，例如：1234567890"
   },
-  "platform_id": {
-    "description": "消息平台实例 ID（可选）",
-    "type": "string",
-    "default": "",
-    "hint": "如果推送失败，在群聊发送 /sid 查看会话格式，填写平台实例 ID（如 千羽）"
-  },
   "qweather_key": {
     "description": "和风天气 Web API Key",
     "type": "string",
     "default": "",
-    "hint": "前往 https://dev.qweather.com 注册获取个人开发者 Key"
+    "hint": "前往 https://dev.qweather.com 注册获取，用于天气查询"
   },
   "qweather_host": {
     "description": "和风天气 API Host",
     "type": "string",
     "default": "",
     "hint": "前往和风天气控制台 → 设置 → 复制你的 API Host，例如：xxx.re.qweatherapi.com"
+  },
+  "tencent_lbs_key": {
+    "description": "腾讯位置服务 Key（用于气象预警）",
+    "type": "string",
+    "default": "",
+    "hint": "前往 https://lbs.qq.com 注册获取，用于查询气象灾害预警"
+  },
+  "tencent_adcode": {
+    "description": "腾讯 LBS 行政区划代码（adcode）",
+    "type": "string",
+    "default": "",
+    "hint": "例如双流区填 510116，成都市填 510100。查询地址：https://lbs.qq.com/service/webService/webServiceGuide/search/webServiceSearch#6"
   },
   "min_magnitude": {
     "description": "最小震级阈值",
