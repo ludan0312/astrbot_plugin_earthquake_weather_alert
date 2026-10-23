@@ -16,7 +16,7 @@ import astrbot.api.message_components as Comp
 from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 
 
-@register("earthquake_weather_alert", "user", "地震+气象预警推送", "1.1.0")
+@register("earthquake_weather_alert", "user", "地震+气象预警推送", "1.1.1")
 class EarthquakeWeatherAlert(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
