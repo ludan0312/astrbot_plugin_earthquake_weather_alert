@@ -2,9 +2,10 @@ import asyncio
 import hashlib
 import json
 import math
-import os
+import shutil
 import time
 from datetime import datetime, timezone, timedelta
+from pathlib import Path
 from typing import Optional
 
 import aiohttp
@@ -12,6 +13,7 @@ from astrbot.api.star import Context, Star, register
 from astrbot.api.event import filter, AstrMessageEvent, MessageChain
 from astrbot.api import logger
 import astrbot.api.message_components as Comp
+from astrbot.core.utils.astrbot_path import get_astrbot_data_path
 
 
 @register("earthquake_weather_alert", "user", "地震+气象预警推送", "1.1.0")
@@ -19,8 +21,16 @@ class EarthquakeWeatherAlert(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
         self.config = config
-        self.plugin_dir = os.path.dirname(os.path.abspath(__file__))
-        self.state_path = os.path.join(self.plugin_dir, "state.json")
+        # 插件数据目录（上架规范：持久化数据必须写入 data/plugin_data/<插件名>/）
+        self.data_dir = Path(get_astrbot_data_path()) / "plugin_data" / self.name
+        self.data_dir.mkdir(parents=True, exist_ok=True)
+        self.state_file = self.data_dir / "state.json"
+
+        # 旧数据迁移：仅当新文件不存在且旧插件目录 state.json 存在时复制一次
+        _old_state = Path(get_astrbot_data_path()) / "plugins" / self.name / "state.json"
+        if _old_state.exists() and not self.state_file.exists():
+            shutil.copy2(_old_state, self.state_file)
+
         self.state = self._load_state()
 
         self.location_id: Optional[str] = None
@@ -42,9 +52,9 @@ class EarthquakeWeatherAlert(Star):
         }
 
     def _load_state(self):
-        if os.path.exists(self.state_path):
+        if self.state_file.exists():
             try:
-                with open(self.state_path, 'r', encoding='utf-8') as f:
+                with open(self.state_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
             except Exception:
                 pass
@@ -55,7 +65,7 @@ class EarthquakeWeatherAlert(Star):
 
     def _save_state(self):
         try:
-            with open(self.state_path, 'w', encoding='utf-8') as f:
+            with open(self.state_file, 'w', encoding='utf-8') as f:
                 json.dump(self.state, f, ensure_ascii=False)
         except Exception as e:
             logger.error(f"[EWA] 状态保存失败: {e}")

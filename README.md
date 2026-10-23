@@ -95,7 +95,7 @@ export QWEATHER_KEY=你的和风Key
 
 - **地震**：按 `eventId + updates` 去重，同一地震的修正会再次推送
 - **气象预警**：按 `title + pub_time + type` 的 MD5 去重，同一预警不会重复推送
-- 状态持久化保存在插件目录的 `state.json`，重启不丢
+- 状态持久化保存在 `data/plugin_data/earthquake_weather_alert/state.json`，重启不丢
 
 ## 开源协议
 
